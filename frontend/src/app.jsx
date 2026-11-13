@@ -16,17 +16,17 @@ function App() {
     const [doctors, setDoctors] = useState([]);
     const [appointments, setAppointments] = useState([]);
     const [notifications, setNotifications] = useState([]);
-    const API = "http://localhost:5001";
+    const API = import.meta.env.VITE_API_URL;
     function refresh() {
-        fetch(API + "/doctors")
+        fetch(`${API}/doctors`)
             .then(res => res.json())
             .then(data => setDoctors(data));
 
-        fetch(API + "/appointments")
+        fetch(`${API}/appointments`)
             .then(res => res.json())
             .then(data => setAppointments(data));
 
-        fetch(API + "/notifications")
+        fetch(`${API}/notifications`)
             .then(res => res.json())
             .then(data => setNotifications(data));
     }
@@ -34,7 +34,7 @@ function App() {
         refresh();
     }, []);
     function login(selectedRole, name, email) {
-        fetch(API + "/login", {
+        fetch(`${API}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -58,7 +58,7 @@ function App() {
         .catch(error => alert(error.message));
     }
     function register(name, email) {
-    fetch(API + "/register", {
+    fetch(`${API}/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

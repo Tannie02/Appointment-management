@@ -5,7 +5,7 @@ function MyAppointments({ user, appointments, refresh }) {
     );
     function cancel(id) {
         if (!window.confirm("Cancel this appointment?")) return;
-        fetch("http://localhost:5001/cancel/" + id, {
+        fetch(`${API}/cancel/` + id, {
             method: "PUT"
         })
         .then(res => res.json())
@@ -17,6 +17,7 @@ function MyAppointments({ user, appointments, refresh }) {
     return (
         <div className="page">
             <h1>My Appointments</h1>
+
             <table>
                 <thead>
                     <tr>
@@ -27,6 +28,7 @@ function MyAppointments({ user, appointments, refresh }) {
                         <th>Action</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {list.map(a => (
                         <tr key={a.id}>

@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-const API = "http://localhost:5001";
+const API = import.meta.env.VITE_API_URL;
 function Booking({ user, doctors, refresh }) {
     const [doctorId, setDoctorId] = useState("");
     const [date, setDate] = useState("");
@@ -10,7 +10,7 @@ function Booking({ user, doctors, refresh }) {
     function loadSlots(id, selectedDate) {
         if (!id || !selectedDate) return;
 
-        fetch(API + "/slots/" + id + "/" + selectedDate)
+        fetch(`${API}/slots/` + id + "/" + selectedDate)
             .then(res => res.json())
             .then(data => setSlots(data));
     }
@@ -21,7 +21,7 @@ function Booking({ user, doctors, refresh }) {
     }, [doctorId, date]);
     function book(e) {
         e.preventDefault();
-        fetch(API + "/book", {
+        fetch(`${API}/book"`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -31,14 +31,14 @@ function Booking({ user, doctors, refresh }) {
                 time
             })
         })
-            .then(async res => {
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.message);
-                alert(data.message);
-                setTime("");
-                refresh();
-                loadSlots(doctorId, date);
-            }).catch(error => alert("Booking failed: " + error.message));
+        .then(async res => {
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message);
+            alert(data.message);
+            setTime("");
+            refresh();
+            loadSlots(doctorId, date);
+        }).catch(error => alert("Booking failed: " + error.message));
     }
     return (
         <div className="page">
@@ -65,11 +65,11 @@ function Booking({ user, doctors, refresh }) {
                     onChange={e => {
                         setDate(e.target.value);
                         setTime("");
-                    }} />
+                    }}/>
                 <label>Available Slots</label>
                 <div className="slot-list">
                     {slots.map(s => (
-                        <button type="button" key={s.time} disabled={s.status === "Booked"} className={time === s.time ? "chosen-slot" : ""} onClick={() => setTime(s.time)}>
+                        <button type="button" key={s.time}  disabled={s.status === "Booked"}  className={time === s.time ? "chosen-slot" : ""} onClick={() => setTime(s.time)}>
                             {s.time}
                             <br />
                             {s.status}

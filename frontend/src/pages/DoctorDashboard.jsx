@@ -25,7 +25,7 @@ function DoctorDashboard({ user, appointments, refresh }) {
         slots.push(hour + ":" + minute);
     }
     function updateStatus(id, status) {
-        fetch("http://localhost:5001/status/" + id, {
+        fetch(`${API}/status/` + id, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status })
