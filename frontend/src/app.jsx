@@ -8,6 +8,7 @@ import DoctorDashboard from "./pages/DoctorDashboard";
 import Booking from "./pages/Booking";
 import MyAppointments from "./pages/MyAppointments";
 import Notifications from "./pages/Notifications";
+import { API } from "./config";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -16,7 +17,6 @@ function App() {
     const [doctors, setDoctors] = useState([]);
     const [appointments, setAppointments] = useState([]);
     const [notifications, setNotifications] = useState([]);
-    const API = import.meta.env.VITE_API_URL;
     function refresh() {
         fetch(`${API}/doctors`)
             .then(res => res.json())

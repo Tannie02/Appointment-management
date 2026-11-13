@@ -1,4 +1,6 @@
 
+import { API } from "../config";
+
 function MyAppointments({ user, appointments, refresh }) {
     const list = appointments.filter(
         a => a.patientId === user.id

@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import Calendar from "../components/Calendar";
+import { API } from "../config";
 
 function DoctorDashboard({ user, appointments, refresh }) {
     const [date, setDate] = useState(

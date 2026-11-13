@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
-
-const API = import.meta.env.VITE_API_URL;
+import { API } from "../config";
 function Booking({ user, doctors, refresh }) {
     const [doctorId, setDoctorId] = useState("");
     const [date, setDate] = useState("");
@@ -21,7 +20,7 @@ function Booking({ user, doctors, refresh }) {
     }, [doctorId, date]);
     function book(e) {
         e.preventDefault();
-        fetch(`${API}/book"`, {
+        fetch(`${API}/book`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
